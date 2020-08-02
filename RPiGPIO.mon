@@ -1,0 +1,29 @@
+package com.apamax;
+
+event LightThreshold
+{
+	constant string CHANNEL := "LightThreshold.channel";
+	integer pin;
+	integer threshold;
+	integer value;
+	boolean state;
+}
+
+/**
+ */
+event RPiGPIO
+{
+	/** @private */
+	import "RPiGPIOPlugin" as plugin;
+	/**
+	 */
+	static action startLightSensor(integer pin, float threshold)
+	{
+		plugin.startLightSensor(pin, threshold, LightThreshold.CHANNEL);
+	}
+
+	static action shutdown()
+	{
+		plugin.shutdown();
+	}
+}
